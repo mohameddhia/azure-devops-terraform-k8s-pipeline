@@ -11,19 +11,19 @@ steps:
   name: publickey
   inputs:
     secureFile: 'id_rsa.pub'
-
-
+    
 - task: TerraformCLI@0
   inputs:
     command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
     backendType: 'azurerm'
     backendServiceArm: 'azure-service-connection'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'aks-getting-started'
     backendAzureRmResourceGroupLocation: 'West Europe'
     backendAzureRmStorageAccountName: 'dhiastorage'
+    backendAzureRmContainerName: 'dhiac'
     backendAzureRmKey: 'k8.tfstate'
-    allowTelemetryCollection: true
     
 - task: TerraformCLI@0
   inputs:
